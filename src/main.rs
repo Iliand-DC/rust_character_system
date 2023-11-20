@@ -30,8 +30,24 @@ fn main() {
         stats: ork_stats
     };
 
+    let cat_bio = Bio {
+        name: "Dac cat".to_string(),
+        age: 30,
+        race: "Cat".to_string(),
+    };
+    let cat_stats = Stats {
+        damage: 14,
+        hp: 27
+    };
+    let cat = Person {
+        class: "Thrief".to_string(),
+        biography: cat_bio,
+        stats: cat_stats
+    };
+
     jane.show_stats();
     ork.show_stats();
+    cat.show_stats();
     let (text_event, result_of_event) = jane.attack();
     println!("{}", text_event);
     println!("{}",ork.take_damage(result_of_event));
