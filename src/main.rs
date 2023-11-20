@@ -26,7 +26,7 @@ trait Doings {
     fn take_damage(&mut self, value:i32) -> String;
 }
 
-trait Print {
+trait Stats {
     fn show_stats(&self);
 }
 
@@ -40,7 +40,7 @@ impl Doings for Person {
     }
 }
 
-impl Print for Person {
+impl Stats for Person {
     fn show_stats(&self) {
         println!("Имя: {}\nКласс: {}\nВозраст: {}\nУрон: {}\nЗдоровье: {}\n",
         self.name,
