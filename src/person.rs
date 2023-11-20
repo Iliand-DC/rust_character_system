@@ -1,6 +1,6 @@
 pub mod person_stats;
 
-use crate::person::person_stats::*;
+pub use crate::person::person_stats::*;
 
 pub trait Doings {
     fn attack(&self) -> (String, i32);
