@@ -1,18 +1,31 @@
 fn main() {
-    let mut jane = Person {
+    let jane_bio = Bio {
         name: "Jane Doe".to_string(),
-        class: "Paladin".to_string(),
         age: 26,
+    };
+    let jane_stats = Stats {
         damage: 8,
         hp: 16
     };
 
-    let mut ork = Person {
+    let mut jane = Person {
+        class: "Paladin".to_string(),
+        biography: jane_bio,
+        stats: jane_stats,
+    };
+
+    let ork_bio = Bio {
         name: "Dumb Ork".to_string(),
-        class: "Barbarian".to_string(),
         age: 42,
+    };
+    let ork_stats = Stats {
         damage: 12,
         hp: 25
+    };
+    let mut ork = Person {
+        class: "Barbarian".to_string(),
+        biography: ork_bio,
+        stats: ork_stats
     };
 
     jane.show_stats();
@@ -29,40 +42,50 @@ fn main() {
     ork.show_stats();
 }
 
-struct Person {
-    name: String,
-    class: String,
-    age: i16,
+struct  Stats {
     damage: i32,
     hp: i32,
 }
+
+struct Bio {
+    name: String,
+    //race: String,
+    age: i16,
+}
+
+struct Person {
+    class: String,
+    biography:Bio,
+    stats:Stats,
+}
+
 
 trait Doings {
     fn attack(&self) -> (String, i32);
     fn take_damage(&mut self, value:i32) -> String;
 }
 
-trait Stats {
+trait IStats {
     fn show_stats(&self);
 }
 
 impl Doings for Person {
     fn attack(&self) -> (String, i32) {
-        (format!("{} нанёс {} урона\n",self.name, self.damage), self.damage)
+        (format!("{} нанёс {} урона\n",self.biography.name, self.stats.damage), self.stats.damage)
     }
     fn take_damage(&mut self, value:i32) -> String {
-        self.hp = self.hp - value;
-        format!("{} получил {} урона\n",self.name, value)
+        self.stats.hp = self.stats.hp - value;
+        format!("{} получил {} урона\n",self.biography.name, value)
     }
 }
 
-impl Stats for Person {
+impl IStats for Person {
     fn show_stats(&self) {
         println!("Имя: {}\nКласс: {}\nВозраст: {}\nУрон: {}\nЗдоровье: {}\n",
-        self.name,
+        self.biography.name,
         self.class,
-        self.age,
-        self.damage,
-        self.hp)
+        self.biography.age,
+        self.stats.damage,
+        self.stats.hp)
     }
 }
