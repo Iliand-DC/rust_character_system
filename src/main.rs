@@ -1,16 +1,32 @@
 fn main() {
-    let mut character = Person {
+    let mut jane = Person {
         name: "Jane Doe".to_string(),
         class: "Paladin".to_string(),
         age: 26,
         damage: 8,
         hp: 16
     };
-    character.show_stats();
-    println!("{}", character.attack());
-    println!("{}", character.take_damage(5));
-    character.show_stats();
 
+    let mut ork = Person {
+        name: "Dumb Ork".to_string(),
+        class: "Barbarian".to_string(),
+        age: 42,
+        damage: 12,
+        hp: 25
+    };
+
+    jane.show_stats();
+    ork.show_stats();
+    let (text_event, result_of_event) = jane.attack();
+    println!("{}", text_event);
+    println!("{}",ork.take_damage(result_of_event));
+
+    let (text_event, result_of_event) = ork.attack();
+    println!("{}", text_event);
+    println!("{}", jane.take_damage(result_of_event));
+
+    jane.show_stats();
+    ork.show_stats();
 }
 
 struct Person {
@@ -22,7 +38,7 @@ struct Person {
 }
 
 trait Doings {
-    fn attack(&self) -> String;
+    fn attack(&self) -> (String, i32);
     fn take_damage(&mut self, value:i32) -> String;
 }
 
@@ -31,12 +47,12 @@ trait Stats {
 }
 
 impl Doings for Person {
-    fn attack(&self) -> String {
-        format!("Ты нанёс {} урона\n", self.damage)
+    fn attack(&self) -> (String, i32) {
+        (format!("{} нанёс {} урона\n",self.name, self.damage), self.damage)
     }
     fn take_damage(&mut self, value:i32) -> String {
         self.hp = self.hp - value;
-        format!("Ты получил {} урона\n", value)
+        format!("{} получил {} урона\n",self.name, value)
     }
 }
 
