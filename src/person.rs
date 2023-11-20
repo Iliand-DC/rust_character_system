@@ -2,28 +2,28 @@ pub mod person_stats;
 
 use crate::person::person_stats::*;
 
-pub fn build_stats(damage_value: i32, hp_value:i32) -> Stats {
+pub fn build_stats(damage: i32, hp:i32) -> Stats {
     Stats {
-        damage: damage_value,
-        hp: hp_value,
+        damage,
+        hp,
     }
 }
 
-pub fn build_bio(name_value:String, race_value:String, 
-    age_value:i16) -> Bio {
+pub fn build_bio(name:String, race:String, 
+    age:i16) -> Bio {
     Bio {
-        name: name_value,
-        race: race_value,
-        age:age_value,
+        name,
+        race,
+        age,
     }
 }
 
-pub fn build_person(class_value: String, 
-    biography_value: Bio, stats_value: Stats) -> Person {
+pub fn build_person(class: String, 
+    biography: Bio, stats: Stats) -> Person {
         Person {
-            class: class_value,
-            biography: biography_value,
-            stats: stats_value,
+            class,
+            biography,
+            stats,
         }
     }
 
