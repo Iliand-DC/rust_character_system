@@ -2,6 +2,7 @@ fn main() {
     let jane_bio = Bio {
         name: "Jane Doe".to_string(),
         age: 26,
+        race: "Human".to_string(),
     };
     let jane_stats = Stats {
         damage: 8,
@@ -17,6 +18,7 @@ fn main() {
     let ork_bio = Bio {
         name: "Dumb Ork".to_string(),
         age: 42,
+        race: "Ork".to_string(),
     };
     let ork_stats = Stats {
         damage: 12,
@@ -49,7 +51,7 @@ struct  Stats {
 
 struct Bio {
     name: String,
-    //race: String,
+    race: String,
     age: i16,
 }
 
@@ -81,11 +83,13 @@ impl Doings for Person {
 
 impl IStats for Person {
     fn show_stats(&self) {
-        println!("Имя: {}\nКласс: {}\nВозраст: {}\nУрон: {}\nЗдоровье: {}\n",
+        println!("Имя: {}\nКласс: {}\nВозраст: {}\nРаса: {}\nУрон: {}\nЗдоровье: {}\n",
         self.biography.name,
         self.class,
         self.biography.age,
+        self.biography.race,
         self.stats.damage,
-        self.stats.hp)
+        self.stats.hp
+        )
     }
 }
