@@ -2,31 +2,6 @@ pub mod person_stats;
 
 use crate::person::person_stats::*;
 
-pub fn build_stats(damage: i32, hp:i32) -> Stats {
-    Stats {
-        damage,
-        hp,
-    }
-}
-
-pub fn build_bio(name:String, race:String, 
-    age:i16) -> Bio {
-    Bio {
-        name,
-        race,
-        age,
-    }
-}
-
-pub fn build_person(class: String, 
-    biography: Bio, stats: Stats) -> Person {
-        Person {
-            class,
-            biography,
-            stats,
-        }
-    }
-
 pub trait Doings {
     fn attack(&self) -> (String, i32);
     fn take_damage(&mut self, value:i32) -> String;

@@ -16,3 +16,29 @@ pub struct Person {
     pub biography:Bio,
     pub stats:Stats,
 }
+
+
+pub fn build_stats(damage: i32, hp:i32) -> Stats {
+    Stats {
+        damage,
+        hp,
+    }
+}
+
+pub fn build_bio(name:String, race:String, 
+    age:i16) -> Bio {
+    Bio {
+        name,
+        race,
+        age,
+    }
+}
+
+pub fn build_person(class: String, 
+    biography: Bio, stats: Stats) -> Person {
+        Person {
+            class,
+            biography,
+            stats,
+        }
+    }
