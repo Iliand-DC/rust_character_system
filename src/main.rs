@@ -1,5 +1,6 @@
 mod person;
 use crate::person::*;
+
 fn main() {
     let jane_bio: Bio = build_bio(
         "Jane Doe".to_string(), 
