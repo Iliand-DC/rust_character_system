@@ -11,25 +11,29 @@ pub trait IStats {
     fn show_stats(&self);
 }
 
+// Here I changed it for better security using. 
+// Now you need to call methods to get access for stats/bio/person variable.
+
 impl Doings for Person {
     fn attack(&self) -> (String, i32) {
-        (format!("{} нанёс {} урона\n",self.biography.name, self.stats.damage), self.stats.damage)
+        (format!("{} нанёс {} урона\n",self.get_biography().name, self.get_stats().damage), self.get_stats().damage)
     }
     fn take_damage(&mut self, value:i32) -> String {
-        self.stats.hp = self.stats.hp - value;
-        format!("{} получил {} урона\n",self.biography.name, value)
+        let new_hp = self.get_stats().hp - value;
+        self.set_stats(Stats {hp: new_hp, damage: self.get_stats().damage});
+        format!("{} получил {} урона\n",self.get_biography().name, value)
     }
 }
 
 impl IStats for Person {
     fn show_stats(&self) {
         println!("Имя: {}\nКласс: {}\nВозраст: {}\nРаса: {}\nУрон: {}\nЗдоровье: {}\n",
-        self.biography.name,
-        self.class,
-        self.biography.age,
-        self.biography.race,
-        self.stats.damage,
-        self.stats.hp
+        self.get_biography().name,
+        self.get_class(),
+        self.get_biography().age,
+        self.get_biography().race,
+        self.get_stats().damage,
+        self.get_stats().hp
         )
     }
 }
