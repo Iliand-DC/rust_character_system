@@ -12,8 +12,20 @@ pub fn build_stats(damage: i32, hp:i32) -> Stats {
 
 // Sorry, I changed your trait cause this wasn't right way to create functions for Stats class
 // You can use 'impl Class_name' for initial class methods.
-
+#[allow(dead_code)]
 impl Stats {
+    pub fn get_stats(&self) -> Stats {
+        Stats {
+            damage: self.damage,
+            hp: self.hp
+        }
+    }
+
+    pub fn set_stats(&mut self, new_stats:Stats) {
+        self.damage = new_stats.damage;
+        self.hp = new_stats.hp;
+    }
+
     pub fn set_stat_damage(&mut self, new_damage:i32) {
         self.damage = new_damage;
     }

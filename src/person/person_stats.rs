@@ -13,31 +13,25 @@ pub struct Person {
     stats:Stats,
 }
 
+#[allow(dead_code)]
 impl Person {
     pub fn get_class(&self) -> String {
         self.class.to_string()
     }
     pub fn get_biography(&self) -> Bio {
-        Bio {
-            name: self.biography.name.to_string(),
-            race: self.biography.race.to_string(),
-            age: self.biography.age,
-        }
+        self.biography.get_biography()
     }
     pub fn get_stats(&self) -> Stats {
-        Stats {
-            hp: self.stats.get_stat_hp(),
-            damage: self.stats.get_stat_damage(),
-        }
+        self.stats.get_stats()
     }
     pub fn set_class(&mut self, class:String) {
         self.class = class
     }
     pub fn set_bio(&mut self, bio:Bio) {
-        self.biography = bio
+        self.biography.set_biography(bio)
     }
     pub fn set_stats(&mut self, stats:Stats) {
-        self.stats = stats
+        self.stats.set_stats(stats)
     }
 }
 
