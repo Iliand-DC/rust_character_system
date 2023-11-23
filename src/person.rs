@@ -1,5 +1,4 @@
 pub mod person_stats;
-
 pub use crate::person::person_stats::*;
 
 pub trait Doings {
@@ -8,7 +7,7 @@ pub trait Doings {
 }
 
 pub trait IStats {
-    fn show_stats(&self);
+    fn show_stats(&self) -> String;
 }
 
 // Here I changed it for better security using. 
@@ -26,8 +25,8 @@ impl Doings for Person {
 }
 
 impl IStats for Person {
-    fn show_stats(&self) {
-        println!("Имя: {}\nКласс: {}\nВозраст: {}\nРаса: {}\nУрон: {}\nЗдоровье: {}\n",
+    fn show_stats(&self) -> String {
+        format!("Имя: {}\nКласс: {}\nВозраст: {}\nРаса: {}\nУрон: {}\nЗдоровье: {}\n",
         self.get_biography().name,
         self.get_class(),
         self.get_biography().age,
