@@ -1,7 +1,7 @@
-mod gui;
-use crate::gui::MyEguiApp;
 mod person;
+mod gui;
 use crate::person::*;
+use crate::gui::MyEguiApp;
 
 #[warn(unused_must_use)]
 fn main() {

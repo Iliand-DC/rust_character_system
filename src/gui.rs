@@ -1,14 +1,14 @@
+use eframe::egui::{self, CollapsingHeader};
+mod style;
 use crate::person::*;
-use eframe::egui;
-use egui::FontFamily::Proportional;
-use egui::FontId;
-use egui::TextStyle::*;
+
+use self::style::set_style;
 
 #[derive(Default)]
 pub struct MyEguiApp {}
 
 impl MyEguiApp {
-    pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
+    pub fn new(_cc: &eframe::CreationContext<'_>) -> Self {
         // Customize egui here with cc.egui_ctx.set_fonts and cc.egui_ctx.set_visuals.
         // Restore app state using cc.storage (requires the "persistence" feature).
         // Use the cc.gl (a glow::Context) to create graphics shaders and buffers that you can use
@@ -18,31 +18,27 @@ impl MyEguiApp {
 }
 
 impl eframe::App for MyEguiApp {
-    fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
-        // Get current context style
-        let mut style = (*ctx.style()).clone();
-
-        // Redefine text_styles
-        style.text_styles = [
-        (Heading, FontId::new(30.0, Proportional)),
-        (Body, FontId::new(25.0, Proportional)),
-        (Monospace, FontId::new(18.0, Proportional)),
-        (Button, FontId::new(18.0, Proportional)),
-        (Small, FontId::new(14.0, Proportional)),
-        ].into();
-
-        // Mutate global style with above changes
-        ctx.set_style(style);
-
+    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        set_style(ctx);
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.vertical_centered(|ui| {
-                let person_bio: Bio = build_bio("Jane Doe".to_string(), "Human".to_string(), 25);
 
-                let person_stats: Stats = build_stats(8, 16);
+                let person = build_person("Паладин".to_string(),
+                build_bio("Jane Doe".to_string(), "Человек".to_string(), 24),
+                build_stats(8, 16));
 
-                let person: Person = build_person("Paladin".to_string(), person_bio, person_stats);
+                let ork = build_person("Варвар".to_string(),
+                build_bio("Брут".to_string(), "Орк".to_string(), 52),
+                build_stats(12, 24));
 
-                ui.label(person.show_stats());
+                CollapsingHeader::new("Список персонажей")
+                .default_open(false)
+                .show(ui, |ui| {
+                    ui.vertical_centered(|ui| {
+                        ui.label(person.show_stats());
+                        ui.label(ork.show_stats());
+                    });
+                });
             });
         });
     }
