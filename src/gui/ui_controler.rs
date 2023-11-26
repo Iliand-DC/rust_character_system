@@ -1,4 +1,4 @@
-use eframe::egui::CollapsingHeader;
+use eframe::egui::Label;
 pub use crate::person::*;
 
 pub fn show_characters_list(ui: &mut eframe::egui::Ui) {
@@ -10,12 +10,6 @@ pub fn show_characters_list(ui: &mut eframe::egui::Ui) {
     build_bio("Брут".to_string(), "Орк".to_string(), 52),
     build_stats(12, 24));
 
-    CollapsingHeader::new("Список персонажей")
-                .default_open(false)
-                .show(ui, |ui| {
-                    ui.vertical_centered(|ui| {
-                        ui.label(person.show_stats());
-                        ui.label(ork.show_stats());
-                    });
-                });
+    ui.add(Label::new(person.show_stats()));
+    ui.add(Label::new(ork.show_stats()));
 }
